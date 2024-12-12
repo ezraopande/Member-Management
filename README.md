@@ -1,6 +1,6 @@
 # MERN Member Management System
 
-Welcome to the MERN Member Management System, a robust and responsive application for managing members efficiently. Built with modern technologies, this project showcases a seamless integration of a powerful backend and an intuitive frontend.
+Welcome to the MERN Member Management System, a robust and responsive application for managing members efficiently. Built with modern technologies, this project showcases a seamless integration of a powerful Node.js backend and an intuitive React.js frontend.
 
 ## Features
 
@@ -76,7 +76,7 @@ Welcome to the MERN Member Management System, a robust and responsive applicatio
 
    ```bash
    git clone https://github.com/ezraopande/Member-Management.git
-   cd mern-member-management
+   cd member-management
    ```
 
 2. **Backend Setup**
@@ -110,7 +110,7 @@ Welcome to the MERN Member Management System, a robust and responsive applicatio
      ```
 
 4. **Database Setup**
-   - Use Sequelize/TypeORM to migrate and seed the SQLite database with test data.
+   - SQLite file is already available in the backend folder.
 
 ### Usage
 
