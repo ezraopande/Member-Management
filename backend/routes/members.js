@@ -48,7 +48,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', upload.single('profilePicture'), async (req, res) => {
     try {
-        const { username, password, name, email, dob } = req.body;
+        const { username, password, name, email, dob, role_id } = req.body;
 
         if (!password) {
             return res.status(400).json({ error: 'Password is required' });
@@ -56,7 +56,7 @@ router.post('/', upload.single('profilePicture'), async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await User.create({ username, password: hashedPassword, role_id: 2 });
+        const user = await User.create({ username, password: hashedPassword, role_id: role_id });
 
         let profilePicture = null;
         if (req.file) {
@@ -65,7 +65,7 @@ router.post('/', upload.single('profilePicture'), async (req, res) => {
 
         const member = await Member.create({
             user_id: user.id,
-            role_id: 2,
+            role_id: role_id,
             name,
             email,
             date_of_birth: dob,
@@ -150,7 +150,7 @@ router.put('/profile', upload.single('profilePicture'), async (req, res) => {
                 username: user.username,
                 email: member.email,
                 dob: member.date_of_birth,
-                photo: member.photo,
+                photo: member.photo
             }
         });
     } catch (err) {
@@ -184,7 +184,7 @@ router.put('/profile/change-password', authenticate, async (req, res) => {
 
 router.put('/:id', upload.single('profilePicture'), async (req, res) => {
     try {
-        const { name, email, dob } = req.body;
+        const { name, username, email, dob, password, role_id } = req.body;
         const memberId = req.params.id;
 
         const member = await Member.findByPk(memberId);
@@ -192,23 +192,39 @@ router.put('/:id', upload.single('profilePicture'), async (req, res) => {
             return res.status(404).json({ error: 'Member not found' });
         }
 
+        const user = await User.findByPk(member.user_id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
         let profilePicture = member.photo;
         if (req.file) {
             profilePicture = req.file.path;
         }
+
+        user.username = username || user.username;
+        user.role_id = role_id || user.role_id;
+
+        if (password) {
+            user.password = await bcrypt.hash(password, 10);
+        }
+        await user.save();
 
         await member.update({
             name,
             email,
             date_of_birth: dob,
             photo: profilePicture,
+            role_id: role_id || member.role_id,
         });
 
         res.json({ message: 'Member updated successfully', member });
     } catch (err) {
+        console.error(err.message);
         res.status(400).json({ error: err.message });
     }
 });
+
 
 router.delete('/:id', async (req, res) => {
     try {
@@ -229,6 +245,17 @@ router.delete('/:id', async (req, res) => {
         res.json({ message: 'Member deleted successfully' });
     } catch (err) {
         res.status(400).json({ error: err.message });
+    }
+});
+
+router.get('/roles', async (req, res) => {
+    try {
+        const queryOptions = { order: [['createdAt', 'DESC']] };
+
+        const roles = await Role.findAll(queryOptions);
+        res.json(roles);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 

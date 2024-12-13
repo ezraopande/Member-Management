@@ -12,7 +12,9 @@ import ProfileEdit from './pages/ProfileEdit';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ControlPanel from './pages/ControlPanel';
+import APIOverview from './pages/APIOverview';
 import APIDocumentation from './pages/APIDocumentation';
+import RolesPage from './pages/RolesPage';
 
 const ProtectedRoute = ({ children }) => {
     return isAuthenticated() ? children : <Navigate to="/login" />;
@@ -47,9 +49,11 @@ const App = () => (
                     <Route path="dashboard" element={<Dashboard />} />
                     <Route path="profile" element={<ProfileEdit />} />
                     <Route path="members" element={<MemberManagement />} />
+                    <Route path="roles" element={<RolesPage />} />
                     <Route path="activity-logs" element={<ActivityLogPage />} />
                     <Route path="control-panel" element={<ControlPanel />} />
-                    <Route path="api-documentation" element={<APIDocumentation />} />
+                    <Route path="/api-docs" element={<APIOverview />} />
+                    <Route path="/api-docs/:sectionName" element={<APIDocumentation />} />
                 </Route>
             </Routes>
         </div>

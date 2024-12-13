@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const authRoutes = require("./routes/auth");
 const memberRoutes = require("./routes/members");
+const roleRoutes = require("./routes/roles");
 const dashboardRoutes = require("./routes/dashboard");
 const activityLogRoutes = require("./routes/activity-logs");
 const controlPanelRoutes = require("./routes/control-panel");
@@ -31,6 +32,7 @@ app.use("/auth", authRoutes);
 app.use("/control-panel", controlPanelRoutes);
 
 app.use("/members", authenticate, logActivity, memberRoutes);
+app.use("/roles", authenticate, logActivity, roleRoutes);
 app.use("/dashboard", authenticate, logActivity, dashboardRoutes);
 app.use("/activity-logs", authenticate, logActivity, activityLogRoutes);
 

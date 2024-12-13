@@ -86,9 +86,15 @@ Welcome to the MERN Member Management System, a robust and responsive applicatio
      cd backend
      ```
    - Install dependencies:
+
      ```bash
      npm install
      ```
+
+     ```bash
+     npm install cross-env --save-dev
+     ```
+
    - Run the development server:
      ```bash
      npm start

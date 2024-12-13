@@ -23,6 +23,11 @@ const getProfile = async () => {
     return response.data;
 };
 
+const getRoles = async () => {
+    const response = await api.get(`/members/roles`);
+    return response.data;
+};
+
 const updateMember = async (id, memberData) => {
     try {
         const response = await api.put(`/members/${id}`, memberData);
@@ -70,5 +75,6 @@ export default {
     deleteMember,
     getProfile,
     changePassword,
-    updateProfile
+    updateProfile,
+    getRoles
 };

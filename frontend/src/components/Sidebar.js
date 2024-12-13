@@ -46,6 +46,15 @@ const Sidebar = ({ isMinimized, isMobileOpen, closeSidebar }) => {
                         requiredRole={1}
                     />
                     <MenuLink
+                        to="/roles"
+                        isMinimized={isMinimized}
+                        icon="fas fa-user-tag"
+                        label="User Roles"
+                        closeSidebar={closeSidebar}
+                        userRole={userRole}
+                        requiredRole={1}
+                    />
+                    <MenuLink
                         to="/activity-logs"
                         isMinimized={isMinimized}
                         icon="fas fa-list-alt"
@@ -62,7 +71,7 @@ const Sidebar = ({ isMinimized, isMobileOpen, closeSidebar }) => {
                         requiredRole={1}
                     />
                     <MenuLink
-                        to="/api-documentation"
+                        to="/api-docs"
                         isMinimized={isMinimized}
                         icon="fas fa-code"
                         label="API Documentation"

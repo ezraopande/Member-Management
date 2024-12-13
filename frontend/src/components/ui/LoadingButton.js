@@ -1,10 +1,10 @@
 import React from 'react';
 
-const LoadingButton = ({ isLoading, loadingText, onClick, children, ...props }) => {
+const LoadingButton = ({ isLoading, loadingText, size="w-full", onClick, children, ...props }) => {
     return (
         <button
             onClick={onClick}
-            className={`w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md flex items-center justify-center ${
+            className={`${size} bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md flex items-center justify-center ${
                 isLoading ? 'cursor-not-allowed' : ''
             }`}
             disabled={isLoading}

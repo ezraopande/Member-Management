@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import memberService from '../services/memberService';
 import LoadingButton from '../components/ui/LoadingButton';
 import { toast } from 'react-toastify';
@@ -6,11 +6,27 @@ import { toast } from 'react-toastify';
 const EditMemberModal = ({ member, closeModal, handleMemberUpdated }) => {
     const [name, setName] = useState(member.name);
     const [username, setUserName] = useState(member.user.username);
+    const [password, setPassword] = useState('');
     const [email, setEmail] = useState(member.email);
     const [dob, setDob] = useState(member.date_of_birth ? member.date_of_birth.split('T')[0] : '');
     const [photo, setPhoto] = useState(null);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [roles, setRoles] = useState([]);
+    const [selectedRole, setSelectedRole] = useState(member.role_id || '');
+
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const data = await memberService.getRoles();
+                setRoles(data);
+            } catch (err) {
+                console.error('Failed to fetch roles:', err.message);
+            }
+        };
+
+        fetchRoles();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,6 +38,9 @@ const EditMemberModal = ({ member, closeModal, handleMemberUpdated }) => {
         formData.append('username', username);
         formData.append('email', email);
         formData.append('dob', dob);
+        formData.append('password', password);
+        formData.append('role_id', selectedRole);
+
         if (photo) formData.append('profilePicture', photo);
 
         try {
@@ -88,7 +107,31 @@ const EditMemberModal = ({ member, closeModal, handleMemberUpdated }) => {
                                 onChange={(e) => setDob(e.target.value)}
                             />
                         </div>
-
+                        <div className="mb-4">
+                            <label className="block mb-2">Select Role</label>
+                            <select
+                                className="w-full p-2 border rounded"
+                                value={selectedRole}
+                                onChange={(e) => setSelectedRole(e.target.value)}
+                                required
+                            >
+                                <option value="">Select a Role</option>
+                                {roles.map((role) => (
+                                    <option key={role.id} value={role.id}>
+                                        {role.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="mb-4">
+                            <label className="block mb-2">Password</label>
+                            <input
+                                type="password"
+                                className="w-full p-2 border rounded"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
                         <div className="mb-4">
                             <label className="block mb-2">Photo</label>
                             <input

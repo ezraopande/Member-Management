@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import memberService from '../services/memberService';
 import LoadingButton from '../components/ui/LoadingButton';
 import { toast } from 'react-toastify';
@@ -12,6 +12,21 @@ const CreateMemberModal = ({ closeModal, handleMemberCreated }) => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [roles, setRoles] = useState([]);
+    const [selectedRole, setSelectedRole] = useState('');
+
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const data = await memberService.getRoles();
+                setRoles(data);
+            } catch (err) {
+                setError(err.message);
+            }
+        };
+
+        fetchRoles();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,6 +39,8 @@ const CreateMemberModal = ({ closeModal, handleMemberCreated }) => {
         formData.append('email', email);
         formData.append('dob', dob);
         formData.append('password', password);
+        formData.append('role_id', selectedRole);
+
         if (photo) formData.append('profilePicture', photo);
 
         try {
@@ -93,13 +110,21 @@ const CreateMemberModal = ({ closeModal, handleMemberCreated }) => {
                         </div>
 
                         <div className="mb-4">
-                            <label className="block mb-2">Photo</label>
-                            <input
-                                type="file"
+                            <label className="block mb-2">Select Role</label>
+                            <select
                                 className="w-full p-2 border rounded"
-                                onChange={(e) => setPhoto(e.target.files[0])}
-                            />
+                                onChange={(e) => setSelectedRole(e.target.value)}
+                                required
+                            >
+                                <option value="">Select a Role</option>
+                                {roles.map((role) => (
+                                    <option key={role.id} value={role.id}>
+                                        {role.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
+
 
                         <div className="mb-4">
                             <label className="block mb-2">Password</label>
@@ -109,6 +134,15 @@ const CreateMemberModal = ({ closeModal, handleMemberCreated }) => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
+                            />
+                        </div>
+
+                        <div className="mb-4">
+                            <label className="block mb-2">Photo</label>
+                            <input
+                                type="file"
+                                className="w-full p-2 border rounded"
+                                onChange={(e) => setPhoto(e.target.files[0])}
                             />
                         </div>
                     </div>
