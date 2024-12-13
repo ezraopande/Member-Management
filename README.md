@@ -132,6 +132,16 @@ npm start
 
 - Explore features like member management, dashboard statistics, and more.
 
+### Screenshots
+
+- ![Dashboard](screenshots/dashboard.png).
+- ![Members](screenshots/members.png).
+- ![User Roles](screenshots/roles.png).
+- ![Activity Logs](screenshots/logs.png).
+- ![System Settings](screenshots/panel.png).
+- ![API Overview](screenshots/api-view.png).
+- ![API ](screenshots/api.png).
+
 ## Contact
 
 For questions, feedback, or collaborations, feel free to reach out:
