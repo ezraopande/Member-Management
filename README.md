@@ -137,26 +137,26 @@ Welcome to the MERN Member Management System, a robust and responsive applicatio
 ### Screenshots
 
 - Dashboard
-- ![Dashboard](screenshots/dashboard.png).
+- ![Dashboard](screenshots/dashboard.png)
 
 - Members
 
-- ![Members](screenshots/members.png).
+- ![Members](screenshots/members.png)
 
 - User Roles
-- ![User Roles](screenshots/roles.png).
+- ![User Roles](screenshots/roles.png)
 
 - Activity Logs
 
-- ![Activity Logs](screenshots/logs.png).
+- ![Activity Logs](screenshots/logs.png)
 
 - System Settings
 
-- ![System Settings](screenshots/panel.png).
+- ![System Settings](screenshots/panel.png)
 
 - API Overview
 
-- ![API Overview](screenshots/api-view.png).
+- ![API Overview](screenshots/api-view.png)
 
 - API
 
