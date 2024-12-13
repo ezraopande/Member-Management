@@ -110,9 +110,10 @@ Welcome to the MERN Member Management System, a robust and responsive applicatio
      npm install
      ```
    - Run the development server:
-     `bash
-npm start
-`
+
+   ```bash
+     npm start
+   ```
 
 ### Note
 
