@@ -138,7 +138,7 @@ npm start
 - Dashboard
 - ![Dashboard](screenshots/dashboard.png).
 
--Members
+- Members
 
 - ![Members](screenshots/members.png).
 
