@@ -113,8 +113,10 @@ Welcome to the MERN Member Management System, a robust and responsive applicatio
      `bash
 npm start
 `
-     **Note**
-   - If you're having challenges installing dependencies, delete the node_mudules folders available in the frontend and backend folders.
+
+### Note
+
+- If you're having challenges installing dependencies, delete the node_mudules folders present in the frontend and backend folders.
 
 4. **Database Setup**
    - SQLite file is already available in the backend folder.
