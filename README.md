@@ -58,7 +58,6 @@ Welcome to the MERN Member Management System, a robust and responsive applicatio
 - **Node.js:** JavaScript runtime for server-side programming.
 - **Express:** Minimalist web framework for Node.js.
 - **SQLite:** Lightweight relational database with normalized tables.
-- **Sequelize/TypeORM:** ORM for efficient database interactions.
 
 ### Authentication
 
